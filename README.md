@@ -1,19 +1,6 @@
 Version 0.1.0
 
-Base de données SQLite, application en local
-
-Les cards:
--> Les clés: id, question, reponse, theme, probabilite, id_theme
-CRUD questions et réponses
-
-Les thèmes:
-Mathématiques, Statistiques, Probabilités, Terminal, Python, Github, Environnements virtuels, Machine Learning, Deep Learning
--> Les clés: id_theme, theme
-CRUD thèmes
-
-Les stats de l'utilisateur:
--> Les clés: id, bonnes_reponses, mauvaises_reponses, date
-Quand l'utilisateur répond à une question, on incrémente bonnes_reponses ou mauvaises_reponses
+Base de données SQLite, application streamlit en local
 
 ## Aperçu des tables de la base de données
 
