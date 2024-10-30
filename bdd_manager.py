@@ -14,7 +14,6 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             question TEXT NOT NULL,
             reponse TEXT NOT NULL,
-            theme TEXT NOT NULL,
             probabilite REAL,
             id_theme INTEGER,
             FOREIGN KEY(id_theme) REFERENCES themes(id_theme) ON DELETE RESTRICT
@@ -65,16 +64,16 @@ def init_db():
 
 
 # Fonctions CRUD pour les 'cards'
-def create_card(question, reponse, theme, probabilite, id_theme):
+def create_card(question, reponse, probabilite, id_theme):
     conn = sqlite3.connect("flashcards.db")
     c = conn.cursor()
 
     c.execute(
         """
-        INSERT INTO cards (question, reponse, theme, probabilite, id_theme)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO cards (question, reponse, probabilite, id_theme)
+        VALUES (?, ?, ?, ?)
     """,
-        (question, reponse, theme, probabilite, id_theme),
+        (question, reponse, probabilite, id_theme),
     )
 
     conn.commit()
@@ -92,17 +91,17 @@ def get_card(id):
     return card
 
 
-def update_card(id, question, reponse, theme, probabilite, id_theme):
+def update_card(id, question, reponse, probabilite, id_theme):
     conn = sqlite3.connect("flashcards.db")
     c = conn.cursor()
 
     c.execute(
         """
         UPDATE cards
-        SET question = ?, reponse = ?, theme = ?, probabilite = ?, id_theme = ?
+        SET question = ?, reponse = ?, probabilite = ?, id_theme = ?
         WHERE id = ?
     """,
-        (question, reponse, theme, probabilite, id_theme, id),
+        (question, reponse, probabilite, id_theme, id),
     )
 
     conn.commit()

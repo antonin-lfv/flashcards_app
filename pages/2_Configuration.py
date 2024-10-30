@@ -105,7 +105,7 @@ with st.form("add_flashcard_form"):
                     id_theme = theme[0]  # theme[0] est l'id_theme
                     break
             if id_theme is not None:
-                create_card(question, answer, selected_theme, 0.5, id_theme)
+                create_card(question, answer, 0.5, id_theme)
                 st.success(
                     f"Flashcard ajoutée avec succès au thème '{selected_theme}'."
                 )
@@ -202,12 +202,10 @@ if selected_theme_display:
                                         new_id_theme = theme[0]
                                         break
                                 if new_id_theme is not None:
-                                    print(card)
                                     update_card(
                                         card[0],
                                         new_question,
                                         new_answer,
-                                        new_theme,
                                         card[4],
                                         new_id_theme,
                                     )

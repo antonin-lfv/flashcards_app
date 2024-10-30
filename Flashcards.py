@@ -64,7 +64,7 @@ def select_card_for_review(selected_themes, previous_card_id=None):
             selected_theme_ids.append(theme[0])  # theme[0] est l'id_theme
 
     placeholders = ",".join("?" * len(selected_theme_ids))
-    base_query = f"SELECT id, question, reponse, theme, probabilite FROM cards WHERE id_theme IN ({placeholders})"
+    base_query = f"SELECT cards.id, cards.question, cards.reponse, cards.probabilite, themes.theme FROM cards INNER JOIN themes ON cards.id_theme=themes.id_theme WHERE cards.id_theme IN ({placeholders})"
     params = selected_theme_ids.copy()
 
     # Obtenir toutes les cartes pour compter le nombre total
@@ -93,7 +93,7 @@ def select_card_for_review(selected_themes, previous_card_id=None):
 
     if cards:
         # Créer une liste de probabilités normalisées
-        probabilities = [card[4] for card in cards]  # card[4] est la probabilité
+        probabilities = [card[3] for card in cards]  # card[3] est la probabilité
         total = sum(probabilities)
         normalized_probabilities = [p / total for p in probabilities]
 
@@ -141,7 +141,7 @@ _, main_col, _ = st.columns([1, 5, 1])
 with main_col:
     with st.container(border=True):
         if card:
-            st.markdown(f"### Thème : {card[3]}")
+            st.markdown(f"### Thème : {card[4]}")
             st.markdown("<hr>", unsafe_allow_html=True)
             st.markdown(f"**Question :**")
             st.info(card[1])
